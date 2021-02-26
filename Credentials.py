@@ -1,5 +1,5 @@
 import os
 
 
-def bearerOSEvn():
+def bearerOSEnv():
     return f"Bearer {os.environ['TwitterBearer']}"
