@@ -1,6 +1,6 @@
 BaseURL = 'https://api.twitter.com'
 
 
-class SearchTweets:
-    Recent = '/2/tweets/search/recent'
-    All = '/2/tweets/search/all'
+class Standard:
+    class SearchTweets:
+        Recent = '/1.1/search/tweets.json'
