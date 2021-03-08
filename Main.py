@@ -3,6 +3,7 @@ import Credentials
 import requests
 import Endpoints
 
+
 BearerSession = requests.Session()
 BearerSession.headers.update({'Authorization': Credentials.bearerOSEnv()})
 
