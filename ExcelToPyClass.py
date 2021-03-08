@@ -140,10 +140,3 @@ for file in os.listdir('Locations'):
                     if el.split(' =')[0].lstrip() == refineName(cell_var) and twoPart[1] == cell_iso:
                         print('Found')
                         writer.write(f'\n{twoPart[0]}')
-
-
-# for filePath in os.listdir('Locations'):
-#     if cell.col_idx == 4 and filePath.split('.')[0] == cell.value:
-#         celldata += '\''
-#         with open(f'Locations\\{filePath}', 'a', encoding='utf-8') as writer:
-#             writer.write('\n' + celldata + '\n')
