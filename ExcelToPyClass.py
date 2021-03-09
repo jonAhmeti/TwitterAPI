@@ -138,5 +138,4 @@ for file in os.listdir('Locations'):
                 for el in citiesToPython:
                     twoPart = el.split('$$$')
                     if el.split(' =')[0].lstrip() == refineName(cell_var) and twoPart[1] == cell_iso:
-                        print('Found')
                         writer.write(f'\n{twoPart[0]}')
