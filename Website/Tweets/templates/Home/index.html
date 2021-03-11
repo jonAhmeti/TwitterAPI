@@ -1,17 +1,23 @@
-{% load static %}
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static 'Home/index.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-          integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
-          crossorigin="anonymous"/>
-    <title>
-        Home
-    </title>
-</head>
-<body>
-    <div style="display: flex">
-
-    </div>
-</body>
-</html>
+{% extends './base.html' %}
+{% block stylesheet %}
+<link rel="stylesheet" href="../../static/Home/index.css"/>
+{% endblock stylesheet %}
+{% block main %}
+<div class="d-flex flex-column h-100 mx-5">
+    <header class="justify-content-center navbar navbar-expand-md border-bottom">
+        <h1 id="header_text">Twitter API <small class="lead">using Python</small></h1>
+    </header>
+    <main class="my-5 d-flex flex-fill">
+        <form>
+            <div>
+                <label>Tweet text:</label>
+                <div class="input-group">
+                    <input type="search" class="form-control" placeholder="My cat" />
+                    <span class="input-group-text search_icon"> <i class="fas fa-search"></i></span>
+                </div>
+                <label class="form-text">* This input is required.</label>
+            </div>
+        </form>
+    </main>
+</div>
+{% endblock main %}
