@@ -1,0 +1,11 @@
+.search_icon{
+    color: #ffffff;
+    background-color: rgb(26,145,218);
+}
+
+.bg_blue{
+    background-color: rgb(26,145,218);
+    border-color: rgb(26,145,218);
+    color: #ffffff;
+    font-weight: 600;
+}

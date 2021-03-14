@@ -1,34 +1,69 @@
 {% extends './base.html' %}
 {% block stylesheet %}
-<link rel="stylesheet" href="../../static/Home/index.css"/>
+<link rel="stylesheet" href="../../static/Home/css/index.css"/>
 {% endblock stylesheet %}
 {% block main %}
 <div class="d-flex flex-column h-100 mx-5">
     <main class="my-5 d-flex flex-fill">
         <form class="row row-cols-auto">
+            <!-- Search Input -->
             <div class="col-auto">
-                <label>Tweet text:</label>
-                <div class="input-group">
-                    <input type="search" class="form-control" placeholder="My cat" />
-                    <span class="input-group-text search_icon"> <i class="fas fa-search"></i></span>
+                <div class="row row-cols-1 text-center border-bottom mx-3 mb-5">
+                    <h3>Text</h3>
                 </div>
-                <label class="form-text">* This input is required.</label>
+                <div class="row row-cols-1">
+                    <div class="input-group my-3">
+                        <label class="input-group-text bg_blue">Text</label>
+                        <input name="query" type="search" class="form-control" placeholder="My cat" />
+                        <span class="input-group-text search_icon bg_blue"> <i class="fas fa-search"></i></span>
+                    </div>
+                    <label class="form-text">* This input is required.</label>
+                </div>
             </div>
-             <div class="col-auto">
-                 <div class="row row-cols-auto">
-                     <label class="row row-cols-auto">Country:</label>
-                 </div>
-                 <div class="row row-cols-auto">
-                     <select class="form-control">
-                         <option value="" disabled selected>Select a country</option>
-                     </select>
-                 </div>
-                 <div class="row row-cols-auto align-items-baseline">
-                     <input type="checkbox" />
-                     <label class="form-text">Search by country?</label>
-                 </div>
+            <!-- Place Inputs -->
+            <div class="col-auto">
+                <div class="row row-cols-1 text-center border-bottom mb-5">
+                    <h3>Location</h3>
+                </div>
+                <!-- Country Input -->
+                <div class="row row-cols-1">
+                    <div class="col-auto">
+                        <div class="d-flex justify-content-end align-items-baseline">
+                                <!-- Optional Country Input -->
+                                <input type="checkbox" name="byPlace" />
+                                <label class="form-text ms-3 mt-0">Search by place?</label>
+                        </div>
+                        <!-- Country Selection Input -->
+                        <div class="input-group">
+                            <label class="input-group-text bg_blue">Country</label>
+                            <select disabled class="form-control" name="country">
+                                <option value="" disabled selected>Select a country</option>
+                                {% for country in context_countries %}
+                                <option value="{{ country.1 }}">{{ country.0 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- City Input -->
+                <div class="input-group my-3">
+                    <label class="input-group-text bg_blue">City</label>
+                    <select disabled class="form-control" id="selectCity">
+                        <option>Select a city</option>
+                    </select>
+                </div>
+                <!-- Radius Input -->
+                <div class="input-group my-3">
+                    <label class="input-group-text bg_blue">Radius</label>
+                    <input name="radius" type="text" class="form-control" placeholder="5.60153" aria-label="Radius" />
+                    <span class="input-group-text bg_blue">km</span>
+                </div>
             </div>
+            <!-- IDK -->
         </form>
     </main>
 </div>
 {% endblock main %}
+{% block scripts %}
+    <script src="../../static/Home/js/index.js"></script>
+{% endblock scripts %}
