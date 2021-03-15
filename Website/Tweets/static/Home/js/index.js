@@ -1,12 +1,19 @@
 $(function() {
 
     const selectCountry = $("select[name='country']");
+    const selectCity = $("select[name='selectCity']");
+    const radius = $("input[name='radius']");
 
     $("input[name='byPlace']").on('change', function () {
         if ($(this).prop('checked')){
             $(selectCountry).prop('disabled', false);
+            $(selectCity).prop('disabled', false);
+            $(radius).prop('disabled', false)
+
         }else{
             $(selectCountry).prop('disabled', true);
+            $(selectCity).prop('disabled', true);
+            $(radius).prop('disabled', true)
         }
         console.log( $(this).prop('checked'));
     });
@@ -23,9 +30,7 @@ $(function() {
                     for (let element of result){
                         options += `<option value="${element[0]}">${element[1]}</option>`
                     }
-                    const selectCity = $('#selectCity');
                     $(selectCity).html(options);
-                    $(selectCity).prop('disabled', false);
                 },
                 error: function (error) {
                     console.log('Something went wrong.', error);
