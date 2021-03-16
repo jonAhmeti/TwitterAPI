@@ -4,35 +4,79 @@
 {% endblock stylesheet %}
 {% block main %}
 <div class="d-flex flex-column h-100 mx-5">
-    <main class="my-5 d-flex flex-fill">
-        <form class="row row-cols-auto">
+    <main class="d-flex flex-fill justify-content-center">
+        <form class="row row-cols-2 justify-content-center">
             <!-- Search Input -->
-            <div class="col-auto mx-3">
-                <div class="row row-cols-1 text-center border-bottom mb-5">
-                    <h3>Text</h3>
+            <div class="col-auto mx-5 my-5">
+                <div class="row row-cols-1 text-center mb-5 justify-content-center">
+                    <div class="col-auto">
+                        <h3>Text</h3>
+                    </div>
                 </div>
                 <div class="row row-cols-1">
-                    <div class="input-group my-3">
-                        <label class="input-group-text bg_blue">Text</label>
-                        <input name="query" type="search" class="form-control input_focus" placeholder="My cat" />
-                        <span class="input-group-text search_icon bg_blue"> <i class="fas fa-search"></i></span>
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <label class="input-group-text bg_blue">Text</label>
+                            <input name="query" type="search" class="form-control input_focus" placeholder="My cat" />
+                            <span class="input-group-text search_icon bg_blue"> <i class="fas fa-search"></i></span>
+                        </div>
+                        <label class="form-text">* This input is required.</label>
                     </div>
-                    <label class="form-text">* This input is required.</label>
+                </div>
+                <div class="row row-cols-1 mt-3">
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <label class="input-group-text bg_blue">Language</label>
+                            <select name="language" type="text" class="form-control input_focus">
+                                <option value="">Disabled</option>
+                                {% for language in context_lang %}
+                                <option value="{{language.0}}">{{language.1}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-2 mt-3">
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <label class="input-group-text bg_blue">Type</label>
+                            <select name="result_type" type="text" class="form-control input_focus">
+                                <option value="mixed">Mixed</option>
+                                <option value="recent">Recent</option>
+                                <option value="popular">Popular</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="input-group">
+                            <label class="input-group-text bg_blue">Count</label>
+                            <input name="count" class="form-control input_focus" type="number" min="1" max="100" placeholder="1-100">
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Place Inputs -->
-            <div class="col-auto mx-3">
-                <div class="row row-cols-1 text-center border-bottom mb-5">
-                    <h3>Location</h3>
+            <div class="col-auto mx-5 my-5">
+                <div class="row row-cols-1 text-center mb-5 justify-content-center">
+                    <div class="col">
+                        <div class="row row-cols-3 justify-content-between">
+                            <div class="col"></div>
+                            <div class="col-auto">
+                                <h3>Location</h3>
+                            </div>
+                            <div class="d-flex align-items-end" style="margin-bottom: .5rem">
+                                <!-- Optional Country Input -->
+                                <div class="d-flex align-items-center">
+                                    <input type="checkbox" name="byPlace" />
+                                    <label class="form-text ms-2 mt-0">Search by place?</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- Country Input -->
                 <div class="row row-cols-1">
                     <div class="col-auto">
-                        <div class="d-flex justify-content-end align-items-baseline">
-                                <!-- Optional Country Input -->
-                                <input type="checkbox" name="byPlace" />
-                                <label class="form-text ms-3 mt-0">Search by place?</label>
-                        </div>
                         <!-- Country Selection Input -->
                         <div class="input-group">
                             <label class="input-group-text bg_blue">Country</label>
@@ -46,21 +90,32 @@
                     </div>
                 </div>
                 <!-- City Input -->
-                <div class="input-group my-3">
-                    <label class="input-group-text bg_blue">City</label>
-                    <select disabled class="form-control input_focus" name="selectCity">
-                        <option value="" disabled selected>Select a city</option>
-                        <option value="" disabled>(Select a country first)</option>
-                    </select>
+                <div class="row row-cols-auto">
+                    <div class="col-auto">
+                        <div class="input-group mt-3">
+                            <label class="input-group-text bg_blue">City</label>
+                            <select disabled class="form-control input_focus" name="selectCity">
+                                <option value="" disabled selected>Select a city</option>
+                                <option value="" disabled>(Select a country first)</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <!-- Radius Input -->
-                <div class="input-group my-3">
-                    <label class="input-group-text bg_blue">Radius</label>
-                    <input disabled name="radius" type="text" class="form-control input_focus" placeholder="5.60153" aria-label="Radius" />
-                    <span class="input-group-text bg_blue">km</span>
+                <div class="row row-cols-auto">
+                    <div class="col-auto">
+                        <div class="input-group mt-3">
+                            <label class="input-group-text bg_blue">Radius</label>
+                            <input disabled name="radius" type="text" class="form-control input_focus" placeholder="5.60153" aria-label="Radius" />
+                            <span class="input-group-text bg_blue">km</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- IDK -->
+            <!-- Submit -->
+            <div class="col mt-3">
+                <button class="btn btn-primary w-100">Search</button>
+            </div>
         </form>
     </main>
 </div>
