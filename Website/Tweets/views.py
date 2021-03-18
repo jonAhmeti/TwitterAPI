@@ -6,7 +6,6 @@ from .Locations import Locations
 from .ISO639Lang import LangISO
 from .API.API import SearchTweets
 import json
-import datetime
 
 
 def saveToDb(tweets):
@@ -65,6 +64,7 @@ def saveToDb(tweets):
                 obj_tweet.created_at = value
         try:
             userDB = models.User.objects.get(id_str=obj_user.id_str)
+            print(f'User object already exists in databse: {userDB}')
         except models.User.DoesNotExist:
             obj_user.save()
         try:
@@ -138,3 +138,27 @@ def cities(request):
 
     cityArray.sort(key=lambda index: index[1])
     return http.JsonResponse(cityArray, safe=False)
+
+
+def tweet_details(request, id_str):
+    try:
+        tweetDB = models.Tweet.objects.get(id_str=id_str)
+        userDB = models.User.objects.get(id_str=tweetDB.user_id)
+
+        if tweetDB.place:
+            firstSplit = tweetDB.place.split(';')
+            secondSplit = []
+            for word in firstSplit:
+                if firstSplit.index(word) != len(firstSplit) - 1:
+                    secondSplit.append(word)
+
+            tweetDB.place = ''
+            for word in secondSplit:
+                tweetDB.place += word.split('=')[1] + '\n'
+
+        formatted_date = tweetDB.created_at.split('+0000 ')
+        tweetDB.created_at = formatted_date[0] + formatted_date[1]
+
+        return render(request, 'Tweets/tweet_details.html', {'context_tweet': tweetDB, 'context_user': userDB})
+    except BaseException:
+        return http.HttpResponseRedirect('..')

@@ -9,7 +9,6 @@ from django.db import models
 
 
 class Tweet(models.Model):
-    id_str = models.CharField(max_length=899)
     text = models.TextField()
     hashtags = models.TextField(blank=True, null=True)
     source = models.TextField(blank=True, null=True)
@@ -19,6 +18,7 @@ class Tweet(models.Model):
     possibly_sensitive = models.BooleanField(blank=True, null=True)
     lang = models.CharField(max_length=3, blank=True, null=True)
     created_at = models.TextField()
+    id_str = models.CharField(primary_key=True, max_length=899)
 
     class Meta:
         managed = False

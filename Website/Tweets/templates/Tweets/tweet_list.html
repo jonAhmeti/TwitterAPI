@@ -1,21 +1,27 @@
 {% extends '../base.html' %}
 {% block title %} Tweets {% endblock title %}
+{% block stylesheet %}
+<link rel="stylesheet" href="../../static/Tweets/tweet_list.css" />
+{% endblock stylesheet %}
 {% block main %}
 <div class="mt-5">
     <table class="table w-100 table-hover align-middle">
         <thead class="table-dark">
             <tr>
                 <th class="col-3 position-sticky top-0 py-3">Created At</th>
+                <th class="col-3 position-sticky top-0 py-3">Open</th>
                 <th class="col-3 position-sticky top-0 py-3">Text</th>
                 <th class="col-3 position-sticky top-0 py-3 text-end">Handle</th>
                 <th class="col-3 position-sticky top-0 py-3 text-end">Language</th>
             </tr>
         </thead>
         {% for tweet in context_tweets %}
-        <tr>
+        <tr class="clickable_tweet">
             {% for key, value in tweet.items %}
                 {% if key == 'created_at' %}
                     <td class="col-3">{{value}}</td>
+                {% elif key == 'id_str' %}
+                <td class="col-1"><a href="/tweet_details/{{value}}">Details</a></td>
                 {% elif key == 'full_text' %}
                     <td class="col-5">{{value}}</td>
                 {% elif key == 'lang' %}
@@ -23,7 +29,7 @@
                 {% elif key == 'user' %}
                     {% for key, value in value.items %}
                         {% if key == 'screen_name' %}
-                            <td class="col-3 text-end">@{{value}}</td>
+                            <td class="col-2 text-end">@{{value}}</td>
                         {% endif %}
                     {% endfor%}
                 {% endif %}
