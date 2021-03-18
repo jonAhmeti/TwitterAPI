@@ -1,8 +1,9 @@
 # User-created
 .idea/
 twitter.txt
-LocationsText/
-Locations/
+Main.py
+Credentials.py
+Endpoints.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
