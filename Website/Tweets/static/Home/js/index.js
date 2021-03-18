@@ -1,8 +1,19 @@
 $(function() {
 
     const selectCountry = $("select[name='country']");
-    const selectCity = $("select[name='selectCity']");
+    const selectCity = $("select[name='geocode']");
     const radius = $("input[name='radius']");
+    const search = $("#search");
+    const query = $("input[name='q']");
+    const q_required = $("#q_required");
+
+    $(search).on('click', function (e) {
+        if (!$(query).val() || $(query).val().trim() === '')
+        {
+            e.preventDefault();
+            $(q_required).addClass(['text-danger', 'fw-bold']);
+        }
+    });
 
     $("input[name='byPlace']").on('change', function () {
         if ($(this).prop('checked')){

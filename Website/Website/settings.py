@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'Website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'DjangoTwitter',
+        'NAME': 'Django',
         'USER': 'bruh',
         'PASSWORD': 'bruh',
         'HOST': 'DESKTOP-8ONQ3QC',

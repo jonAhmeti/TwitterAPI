@@ -1,11 +1,12 @@
-{% extends './base.html' %}
+{% extends '../base.html' %}
 {% block stylesheet %}
 <link rel="stylesheet" href="../../static/Home/css/index.css"/>
 {% endblock stylesheet %}
 {% block main %}
 <div class="d-flex flex-column h-100 mx-5">
     <main class="d-flex flex-fill justify-content-center">
-        <form class="row row-cols-2 justify-content-center">
+        <form class="row row-cols-2 justify-content-center" method="post" action="search">
+            {% csrf_token %}
             <!-- Search Input -->
             <div class="col-auto mx-5 my-5">
                 <div class="row row-cols-1 text-center mb-5 justify-content-center">
@@ -17,17 +18,17 @@
                     <div class="col-auto">
                         <div class="input-group">
                             <label class="input-group-text bg_blue">Text</label>
-                            <input name="query" type="search" class="form-control input_focus" placeholder="My cat" />
+                            <input name="q" type="search" class="form-control input_focus" placeholder="My cat" />
                             <span class="input-group-text search_icon bg_blue"> <i class="fas fa-search"></i></span>
                         </div>
-                        <label class="form-text">* This input is required.</label>
+                        <label class="form-text" id="q_required">* This input is required.</label>
                     </div>
                 </div>
                 <div class="row row-cols-1 mt-3">
                     <div class="col-auto">
                         <div class="input-group">
                             <label class="input-group-text bg_blue">Language</label>
-                            <select name="language" type="text" class="form-control input_focus">
+                            <select name="lang" type="text" class="form-control input_focus">
                                 <option value="">Disabled</option>
                                 {% for language in context_lang %}
                                 <option value="{{language.0}}">{{language.1}}</option>
@@ -94,7 +95,7 @@
                     <div class="col-auto">
                         <div class="input-group mt-3">
                             <label class="input-group-text bg_blue">City</label>
-                            <select disabled class="form-control input_focus" name="selectCity">
+                            <select disabled class="form-control input_focus" name="geocode">
                                 <option value="" disabled selected>Select a city</option>
                                 <option value="" disabled>(Select a country first)</option>
                             </select>
@@ -109,12 +110,13 @@
                             <input disabled name="radius" type="text" class="form-control input_focus" placeholder="5.60153" aria-label="Radius" />
                             <span class="input-group-text bg_blue">km</span>
                         </div>
+                        <p class="form-text">* When searching by location, <span class="fw-bold">put a higher result count</span> number.</p>
                     </div>
                 </div>
             </div>
             <!-- Submit -->
             <div class="col mt-3">
-                <button class="btn btn-primary w-100">Search</button>
+                <button class="btn btn-primary w-100" id="search">Search</button>
             </div>
         </form>
     </main>
