@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django import http
-from django.views import generic
 from . import models
 from .Locations import Locations
 from .ISO639Lang import LangISO
 from .API.API import SearchTweets
 import json
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from nltk.tokenize.casual import TweetTokenizer
+from nltk import FreqDist
 
 
 def saveToDb(tweets):
@@ -159,6 +161,16 @@ def tweet_details(request, id_str):
         formatted_date = tweetDB.created_at.split('+0000 ')
         tweetDB.created_at = formatted_date[0] + formatted_date[1]
 
-        return render(request, 'Tweets/tweet_details.html', {'context_tweet': tweetDB, 'context_user': userDB})
+        context_analysis = {}
+        context_analysis['polarity_score'] = SentimentIntensityAnalyzer().polarity_scores(tweetDB.text)
+        tweetTokenizer = TweetTokenizer(strip_handles=True)
+
+        tokenizedWords = []
+        for word in tweetTokenizer.tokenize(tweetDB.text):
+            if word != ':' and word != '.' and word != ',' and word != '?' and word != '!' and len(word) != 1:
+                tokenizedWords.append(word)
+        context_analysis['word_freq'] = FreqDist(tokenizedWords)
+
+        return render(request, 'Tweets/tweet_details.html', {'context_tweet': tweetDB, 'context_user': userDB, 'context_nltk': context_analysis})
     except BaseException:
         return http.HttpResponseRedirect('..')
