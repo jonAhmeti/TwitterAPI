@@ -22,4 +22,13 @@ Inside API there's a class called SearchTweets which is used to contact the API.
 SearchTweets has two methods: 
   set_params(**kwargs), this method accepts a dictionary-like object from which the parameters will be set.
   send(), is the method which prepares the request and sends a PreparedRequest with some data also saved in the Session. It returns a Response object.
-  
+
+The project also uses python to convert data from an excel file to a python Enum class for countries, cities and ISO languages.
+Converting countries is done by ExcelToEnumCountries.py which will output a Locations.py file with all the countries taken from worldcities.xlsx
+Converting languages is done by LangISO_txt_to_enum.py which outputs a ISO639Lang.py file with all language 639-1 codes and the language names.
+
+The converted Enum classes are all used in the main page for dropdown menus.
+For this reason they are also added inside Website > Twitter which is part of installed apps in the Website > settings.py
+
+Once the user submits their search they are able to look at a list/table of results, to see more information they can click on the Details link of the corresponding tweet which will redirect them to the tweet_details/{tweet_id} url where they are able to see a range of information about the tweet and the user.
+In case the user changes the link to a different ID that is not saved to our database they will then be redirected to the homepage
